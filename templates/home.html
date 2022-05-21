@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- style sheets -->
+        <link href="static/bootstrap.min.css" rel="stylesheet" >
+        <title>Home</title>
+
+      <style>
+        footer{
+          position: fixed;
+          bottom:0px;
+          width:100%;
+          height:48px;
+          background-color:rgba(128, 128, 128, 0.518);
+          flex:none;
+          text-align:center;
+          font-size: 18px;
+          padding:8px 0px;
+    
+}    
+      </style>
+      
+    </head>
+
+
+
+
+    <body style="background-color:beige ;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">Alpha Store</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav  mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/"><b>Home</b></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/cart" aria-current="page"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" color="black" class="bi bi-cart" viewBox="0 0 16 16">
+                      <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg></a>
+                  </li>
+                  <li>
+                    <form action="/search" method="get" class="d-flex">
+                      <input required name="search" autocomplete="off" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <select name="category" class="form-select" aria-label="Default select example" style="width:max-content;">
+                        <option value="all" selected>ALL</option>
+                        <option value="equipment">Equipment</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="food">Food</option>
+                        <option value="medicine">Medicine</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="furniture">Furniture</option>
+                        <option value="clothes">Clothes</option>
+                      </select>
+                      <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </form>
+                  </li>
+                  {% if session['type'] == 'user' %}
+                    <li class="nav-item">
+                      <a class="nav-link active" style="margin-left: 10px;" aria-current="page" href="/custHistory">History</a>
+                    </li>
+                  {% endif %}
+                </ul>
+                  <!--this will show if you're  logged in-->
+                {% if session['type'] == 'user' %}
+                  <div class="d-inline-flex ms-auto">
+                    <form action="/logout" method="get" class="d-inline-flex ms-auto">
+                    <button type="button" class="btn btn-outline-success " disabled ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                                                          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                      </svg></button>
+                    <button type="submit" class="btn btn-outline-success">Logout</button></form>
+                    
+                  </div>
+
+                <!--this will show if you're not logged in-->
+                {% else %}                
+                  <div class="d-inline-flex ms-auto ">
+                    <a href="/login"><button class="btn btn-outline-success " type="button">Login/Register</button></a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </nav>
+          <!--DONE WITH THE NAVIGATION BAR AT LAST-->
+
+          <!--the products container-->
+          <div class="container overflow-auto " style="border-style:solid   ;border-width: 2px; width:970px ; height: 507px;background-color:rgba(248, 249, 250, 1); margin-top: 35px;margin-bottom: 35px; background-color: beige;">
+            <!-- here we will construct the products cards which all are the same except for the values that are 
+                  determined by the database  -->
+                  <div class="row row-cols-1 g-4 justify-content-center" style="margin-top: 0">
+                    {% for product in products %}
+                    <div class="col-auto">
+                      <div class="card text-center justify-content-center" style="width: 18rem;">
+                        <div class="card-header" style="background-color: gray; height:40px ; color: floralwhite;">{{product[1]}}</div>
+                        <img src="{{product[6]}}" style="width: 100%;height:150px ;" class="card-img-top" alt="the products image" >
+                        <div class="container-fluid"><pre>Price: <span>{{product[4]}}</span> </pre></div>
+                        <div class="card-body overflow-auto" style="height: 80px    ;">
+                          <h5 class="card-title">Description</h5>
+                          <p class="card-text ">{{product[3]}}</p>
+                          
+                        </div>
+                        <div class="card-header justify-content-around" >
+                          <form action="/" method="post">
+                            <button name="submit" type="submit" value="buy" class="btn btn-primary btn-sm" style="width: 30%; margin-top:0px ;">BUY!!</button>
+                            <button name="submit" type="submit" value="cart" class="btn btn-danger btn-sm" style="width: 30%; margin-top:0px ;">CART!!</button>
+                            <input style="width: 35%; margin-top:0px;" type="number" name="number" min="1" max="{{product[5]}}" placeholder="Number">
+                            <input type="hidden" name="pid" value="{{product[0]}}">
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% if flag == 0 %}
+                      <h3>No results!!</h3>
+                    {% endif %}
+                  </div>
+          </div>
+          
+          <footer >
+            Copyright &copy; 2022   Team#19 Store
+         </footer>
+          
+        <!-- scripts-->
+        <script src="static/bootstrap.bundle.min.js" ></script>
+    </body>
+</html>
