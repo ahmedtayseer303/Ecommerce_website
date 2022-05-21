@@ -1,0 +1,57 @@
+
+<!doctype html>
+
+<head>
+    <link rel="stylesheet" href="static/Userpage.Css">
+    <title>Buyer Data</title>
+</head>
+
+<body>
+    <script src="static/jquery-3.6.0.min.js"></script>
+    <script src='static/Userpage.js'></script>
+
+
+    <header>
+        
+        <!-- <p class="hparagraph">Buyer Data</p>
+        <a href="/">Home</a> -->
+        <div class="container " style="padding-top: 0.39rem; padding-bottom:0.3125rem" >
+            <div style="width: fit-content; margin-left: 15px;position: fixed;top: -7.5px;"><a class = "site-name" href="/"><p > Alpha Store </p></a></div>
+            <div ><a href="/stocks"><p class="hparagraph">Stock</p></a></div>
+            <div ><a href="/sellerHistory"><p class="hparagraph2">Sold Products</p></a></div>
+            <div ><p class="hparagraph3"><b>Customer Data</b></p></div>
+   
+            <div class="btn-container"><a href="/logout"><button class="log-out-btn" type="submit" value="log-out">Logout</button></a></div>
+        </div>
+ 
+    </header>
+
+
+    <div class="tblediv">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Adress</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{customer[0][2]}}</td>
+                    <td>{{customer[0][5]}}</td>
+                    <td>{{customer[0][1]}}</td>
+                    <td>{{customer[0][4]}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div> 
+    <footer>
+   Copyright &copy; 2022   Team#19 Store
+</footer>
+
+
+</body>
+
+
