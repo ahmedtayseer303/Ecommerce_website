@@ -19,7 +19,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 # Your mysql passowrd
-app.config['MYSQL_PASSWORD'] = '2927256'
+app.config['MYSQL_PASSWORD'] = '******'
 
 # Configure the name of DB to be connected
 app.config['MYSQL_DB'] = 'ecommerce'
