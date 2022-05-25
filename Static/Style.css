@@ -1,0 +1,13 @@
+.seller {
+   position: relative;
+   left: 30px;
+   
+}
+#sel {
+   position: relative;
+   top: 20px;
+   width: 50px;
+}
+#log a {
+   text-decoration: none;
+}
