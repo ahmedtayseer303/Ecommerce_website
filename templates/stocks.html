@@ -1,0 +1,131 @@
+<!doctype html>
+
+<head>
+    <link rel="stylesheet" href="static/Userpage.Css">
+    <title>Stock</title>
+</head>
+
+<body>
+    <script src="static/jquery-3.6.0.min.js"></script>
+    <script src='static/Userpage.js'></script>
+
+
+    <header>
+        
+        <!-- <p class="hparagraph">stock</p>
+        <a href="C:\Users\Gehaazy\Downloads\New folder\home.html">Logout</a>
+        <a href="/sellerHistory">History</a> -->
+            <div class="container " style="padding-top: 0.39rem; padding-bottom:0.3125rem" >
+               <div style="width: fit-content; margin-left: 15px;position: fixed;top: -7.5px;"><a class = "site-name" href="/"><p > Alpha Store </p></a></div>
+               <div ><p class="hparagraph"><b>Stock</b></p></div>
+               <div ><a href="/sellerHistory"><p class="hparagraph2">Sold Products</p></a></div>
+      
+               <div class="btn-container"><a href="/logout"><button class="log-out-btn" type="submit" value="log-out">Logout</button></a></div>
+            </div>
+    </header>
+
+
+    <div class="tblediv">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product image</th>
+                    <th>Product Name</th>
+                    <th>Product Description</th>
+                    <th>Product Price</th>
+                    <th>Product Quantity</th>
+                    <th>Delete Product</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td><img src="{{product[6]}}" width="170px" height="100px"></td>
+                    <td>{{product[1]}}</td>
+                    <td>{{product[3]}}</td>
+                    <td>{{product[4]}} EGP</td>
+                    <td>    
+                        <form action="/stocks" method="post">
+                            <input type="number" name="number" value="{{product[5]}}" min="0">
+                            <input type="hidden" name="pid" value="{{product[0]}}">
+                            <button name="submit" value="editqnt" type="submit">Edit</button>
+                        </form>
+                    </td>
+                        <td>                        
+                        <form action="/stocks" method="post">
+                            <input type="hidden" name="pid" value="{{product[0]}}">
+                            <button name="submit" value="delete" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+                
+            </tbody>
+        </table>
+    </div> 
+    
+    <div class="show-popupdiv">   
+        <button class="show-popup">+ New product</button>
+    </div>
+
+
+    <div class="popup"> 
+        <div class="inner">
+                <form action="/add" method="post" class="form1">
+                    <p style="font-size: 40px;font-weight: bold;text-align: center;letter-spacing:3px;width: 500px; margin-bottom: 60px;">Product Data</p>
+                    <div class="field">
+                        <label>Name:</label>
+                        <input type="text" name="name" placeholder="Enter Product name" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Description:</label>
+                        <input type="text" name="description" maxlength="50" placeholder="Enter Product Description"required>    
+                    </div>
+
+                    <div class="field">
+                        <label>Price:</label>
+                        <input type="number" name="price" placeholder="Enter Product price "required min="0">
+                    </div>
+                    
+                    <div class="field">
+                        <label>Image Url:</label>
+                        <input type="url" name="image" placeholder="Enter image url" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Quantity:</label>
+                        <input type="number" required placeholder="Enter product quantity" name="quantity" min="1">
+                    </div>
+                    <div class="field">
+                        <label>category:</label>
+                        <select name="category">
+                            <option value="" selected disabled>Product category</option>
+                            <option value="equipment">Equipment</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="food">Food</option>
+                            <option value="medicine">Medicine</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="furniture">Furniture</option>
+                            <option value="clothes">Clothes</option>
+                            <option value="">Other</option>
+                          </select>    
+                    </div>
+
+
+
+                    <input type="submit" value="Add" style="position:absolute; bottom:20px;left:390px;border: 0px ;width:80px;height:50px;background-color: rgb(16, 133, 243); color: aliceblue; font-weight: bold;font-size: 18px;" >
+
+                </form>
+        </div>
+    </div>
+    
+
+
+
+<footer>
+   Copyright &copy; 2022   Team#19 Store
+</footer>
+
+
+</body>
