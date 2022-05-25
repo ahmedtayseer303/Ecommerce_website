@@ -1,0 +1,60 @@
+CREATE TABLE Customer (
+custID 					INTEGER 		AUTO_INCREMENT,
+custPhone 				VARCHAR(16)  	NOT NULL,
+username 				VARCHAR(100) 	NOT NULL 	UNIQUE,
+hash 					TEXT			NOT NULL,
+custAddress				VARCHAR(200) 	NOT NULL,
+custEmail 				VARCHAR(100) 	NOT NULL,
+
+CONSTRAINT 	custPK 		PRIMARY KEY (CustID)
+);
+
+
+CREATE TABLE Seller(
+sellerID				INTEGER 		AUTO_INCREMENT,
+username 				VARCHAR(100) 	NOT NULL 	UNIQUE,
+hash 					TEXT			NOT NULL,
+sellerPhone 			VARCHAR(16)  	NOT NULL,
+sellerEmail 			VARCHAR(100) 	NOT NULL,
+
+CONSTRAINT 	sellerPK	PRIMARY KEY (sellerID)
+);
+
+
+CREATE TABLE Product(
+prodID					INTEGER 		AUTO_INCREMENT,
+prodName 				VARCHAR(100) 	NOT NULL,
+category 				VARCHAR(100),
+prodDescription			VARCHAR(400) 	NOT NULL,
+prodPrice 				DECIMAL(8,2) 	NOT NULL,
+prodStockQnt 			INTEGER 		NOT NULL,
+imageURL 				TEXT,
+
+sellerID				INTEGER 		NOT NULL,
+
+CONSTRAINT 	prodPK 		PRIMARY KEY (prodID),
+CONSTRAINT prodSellerFK	FOREIGN KEY (sellerID) REFERENCES Seller (sellerID) ON DELETE CASCADE
+);
+
+CREATE TABLE Cart(
+custID 					INTEGER 		NOT NULL,
+prodID					INTEGER 		NOT NULL,
+orderQnt 				INTEGER 		NOT NULL,
+
+CONSTRAINT 	cartPK 		PRIMARY KEY (custID, prodID),
+CONSTRAINT 	cartcustFK	FOREIGN KEY (custID) REFERENCES Customer (custID) ON DELETE CASCADE,
+CONSTRAINT 	cartprodFK	FOREIGN KEY (prodID) REFERENCES Product  (prodID) ON DELETE CASCADE
+);
+
+
+CREATE TABLE Purchase(
+purDate 				DATETIME 		NOT NULL 		DEFAULT CURRENT_TIMESTAMP,
+purQnt 					INTEGER 		NOT NULL,
+
+prodID 					INTEGER 		NOT NULL,
+custID 					INTEGER 		NOT NULL,
+
+CONSTRAINT 	purPK 		PRIMARY KEY (prodID, custID, purDate),
+CONSTRAINT 	purcustFK	FOREIGN KEY (custID) REFERENCES Customer (custID) ON DELETE CASCADE,
+CONSTRAINT 	purProdFK	FOREIGN KEY (prodID) REFERENCES Product  (prodID) ON DELETE CASCADE
+);
